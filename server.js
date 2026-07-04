@@ -39,6 +39,10 @@ app.get('/projects', (req, res) => {
   res.render('projects', { title: 'Service Projects' });
 });
 
+app.get('/category', (req, res) => {
+  res.render('category', { title: 'Service Categories' });
+});
+
 app.use((req, res) => {
   res.status(404).send('Page not found');
 });
