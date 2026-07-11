@@ -10,8 +10,79 @@ CREATE TABLE organization (
 );
 
 -- ========================================
--- Insert sample data: Organizations
+-- Service Project Table
 -- ========================================
+CREATE TABLE service_project (
+    project_id SERIAL PRIMARY KEY,
+    organization_id INT NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(150) NOT NULL,
+    project_date DATE NOT NULL,
+
+    CONSTRAINT fk_service_project_organization
+        FOREIGN KEY (organization_id)
+        REFERENCES organization (organization_id)
+        ON DELETE CASCADE
+);
+
+-- ========================================
+-- Category Table
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Junction Table
+-- ========================================
+CREATE TABLE service_project_category (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+
+INSERT INTO category (name)
+VALUES
+('Community Development'),
+('Environmental Sustainability'),
+('Volunteer Services');
+
+INSERT INTO service_project_category (project_id, category_id)
+VALUES
+-- Community Development
+(1,1),
+(2,1),
+(9,1),
+(10,1),
+(11,1),
+
+-- Environmental Sustainability
+(3,2),
+(4,2),
+(14,2),
+(15,2),
+(16,2),
+
+-- Volunteer Services
+(5,3),
+(6,3),
+(19,3),
+(20,3),
+(21,3);
+
 INSERT INTO organization (
     name,
     description,
@@ -37,23 +108,6 @@ VALUES
     'hello@unityserve.org',
     'unityserve-logo.png'
 );
-
--- Service Project Table
--- ========================================
-CREATE TABLE service_project (
-    project_id SERIAL PRIMARY KEY,
-    organization_id INT NOT NULL,
-    title VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    location VARCHAR(150) NOT NULL,
-    project_date DATE NOT NULL,
-
-    CONSTRAINT fk_service_project_organization
-        FOREIGN KEY (organization_id)
-        REFERENCES organization (organization_id)
-        ON DELETE CASCADE
-);
-
 
 INSERT INTO service_project (
     organization_id,
@@ -179,3 +233,27 @@ VALUES
     'Hermanus Community Centre',
     '2026-11-21'
 );
+
+SELECT
+    sp.project_id,
+    sp.title,
+    o.name AS organization,
+    sp.location,
+    sp.project_date
+FROM service_project sp
+JOIN organization o
+    ON sp.organization_id = o.organization_id
+ORDER BY sp.project_date;
+
+SELECT
+    o.name AS organization,
+    COUNT(sp.project_id) AS total_projects
+FROM organization o
+LEFT JOIN service_project sp
+    ON o.organization_id = sp.organization_id
+GROUP BY o.name
+ORDER BY o.name;
+
+DELETE FROM service_project
+WHERE project_id IN (7, 8, 12, 13, 17, 18);
+
