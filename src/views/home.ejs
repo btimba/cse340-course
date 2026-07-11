@@ -1,9 +1,14 @@
 <%- include('partials/header') %>
-<main class="hero">
-    <section class="hero-card">
+<main class="home-page">
+    <section class="hero-card home-hero">
+        <span class="eyebrow">Volunteer Network</span>
         <h1><%= title %></h1>
         <h2>Welcome to the CSE 340 Service Network!</h2>
-        <p>Our mission is to promote service across the world by connecting volunteers with service opportunities in their community.</p>
+        <p class="page-intro">Our mission is to promote service across the world by connecting volunteers with service opportunities in their community.</p>
+        <div class="home-links">
+            <a class="home-action" href="/projects">View Projects</a>
+            <a class="home-action secondary" href="/organizations">Meet Partners</a>
+        </div>
         <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
     </section>
 </main>

@@ -1,13 +1,38 @@
 <%- include('partials/header') %>
 
-<main>
-    <h1><%= title %></h1>
+<main class="categories-page">
+    <section class="categories-hero">
+        <span class="eyebrow">Explore by Category</span>
+        <h1><%= title %></h1>
+        <p class="page-intro">Discover the different focus areas represented throughout the community service directory.</p>
+    </section>
 
-   <ul>
-    <% categories.forEach(category => { %>
-        <li><%= category.name %></li>
-    <% }) %>
-</ul>
+    <section class="categories-grid">
+        <% if (categories.length) { %>
+            <div class="project-card">
+                <ul class="project-list category-list">
+                    <% categories.forEach(category => { %>
+                        <li class="project-item category-item">
+                            <div class="project-card-inner">
+                                <div class="project-main">
+                                    <span class="project-date">Category</span>
+                                    <h2><%= category.name %></h2>
+                                    <p class="project-meta">
+                                        <span class="project-org">Community focus area</span>
+                                    </p>
+                                </div>
+                                <span class="project-chevron" aria-hidden="true">→</span>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <p>No categories are available right now. Please check back later.</p>
+            </div>
+        <% } %>
+    </section>
 </main>
 
 <%- include('partials/footer') %>

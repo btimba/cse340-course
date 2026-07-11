@@ -1,15 +1,42 @@
 <%- include('partials/header') %>
-    <main>
-        <h1><%= title %></h1>
-        
-        <p>Here are a few of our partner organizations:</p>
-        <ul>
 
-            <% organizations.forEach(organization => { %>
-                <li><img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo"><strong><%= organization.name %></strong>: <%= organization.contact_email %></li>
-            <% }); %>
-        </ul>
-    </main>
+<main class="organizations-page">
+    <section class="organizations-hero">
+        <span class="eyebrow">Partner Organizations</span>
+        <h1><%= title %></h1>
+        <p class="page-intro">Meet a few of the local partners helping make community service opportunities possible.</p>
+    </section>
+
+    <section class="organizations-grid">
+        <% if (organizations.length) { %>
+            <div class="project-card">
+                <ul class="project-list organization-list">
+                    <% organizations.forEach(organization => { %>
+                        <li class="project-item organization-item">
+                            <div class="project-card-inner organization-card-inner">
+                                <div class="organization-logo-wrap">
+                                    <img class="organization-logo" src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
+                                </div>
+                                <div class="project-main">
+                                    <span class="project-date">Partner Organization</span>
+                                    <h2><%= organization.name %></h2>
+                                    <p class="project-meta">
+                                        <span class="project-org"><%= organization.contact_email %></span>
+                                    </p>
+                                </div>
+                                <span class="project-chevron" aria-hidden="true">→</span>
+                            </div>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <p>No partner organizations are currently listed. Please check back later.</p>
+            </div>
+        <% } %>
+    </section>
+</main>
 
 <%- include('partials/footer') %>
 
