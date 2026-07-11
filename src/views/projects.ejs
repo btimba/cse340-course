@@ -2,13 +2,44 @@
     
     <%- include('partials/header') %>
 
-<main>
-    <h1><%= title %></h1>
-        <h2>Upcoming Service Projects</h2>
-<ul>
-    <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-    <li>Food Drive - Help collect and distribute food to those in need.</li>
-    <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-</ul>
-    </main>
+<main class="projects-page">
+    <section class="projects-hero">
+        <span class="eyebrow">Community Service</span>
+        <h1><%= title %></h1>
+        <p class="page-intro">Browse upcoming service projects and discover local volunteer opportunities with our partner organizations.</p>
+    </section>
+
+    <section class="projects-grid">
+        <% if (projects.length) { %>
+            <div class="project-card">
+                <ul class="project-list">
+                    <% projects.forEach(project => { %>
+                        <li class="project-item">
+                            <div class="project-card-inner">
+                                <div class="project-main">
+                                    <span class="project-date">
+                                        <%= new Date(project.project_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        }) %>
+                                    </span>
+                                    <h2><%= project.title %></h2>
+                                    <p class="project-meta">
+                                        <span class="project-org"><%= project.organization_name %></span>
+                                    </p>
+                                </div>
+                                <span class="project-chevron" aria-hidden="true">→</span>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <p>No upcoming service projects are currently available. Check back soon for new opportunities.</p>
+            </div>
+        <% } %>
+    </section>
+</main>
     <%- include('partials/footer') %>
