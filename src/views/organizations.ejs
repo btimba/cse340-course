@@ -9,27 +9,26 @@
 
     <section class="organizations-grid">
         <% if (organizations.length) { %>
-            <div class="project-card">
-                <ul class="project-list organization-list">
-                    <% organizations.forEach(organization => { %>
-                        <li class="project-item organization-item">
-                            <div class="project-card-inner organization-card-inner">
-                                <div class="organization-logo-wrap">
-                                    <img class="organization-logo" src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
-                                </div>
-                                <div class="project-main">
-                                    <span class="project-date">Partner Organization</span>
-                                    <h2><%= organization.name %></h2>
-                                    <p class="project-meta">
-                                        <span class="project-org"><%= organization.contact_email %></span>
-                                    </p>
-                                </div>
-                                <span class="project-chevron" aria-hidden="true">→</span>
+            <ul class="project-list organization-list">
+                <% organizations.forEach(organization => { %>
+                    <li class="project-item organization-item">
+                        <div class="project-card-inner organization-card-inner">
+                            <div class="organization-logo-wrap">
+                                <img class="organization-logo" src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
                             </div>
-                        </li>
-                    <% }); %>
-                </ul>
-            </div>
+                            <div class="project-main">
+                                <a class="organization-link" href="/organization/<%= organization.organization_id %>">
+                                    <h2><%= organization.name %></h2>
+                                </a>
+                                <p class="project-meta">
+                                    <span class="project-org"><%= organization.contact_email %></span>
+                                </p>
+                            </div>
+                            <span class="project-chevron" aria-hidden="true">→</span>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
         <% } else { %>
             <div class="empty-state">
                 <p>No partner organizations are currently listed. Please check back later.</p>

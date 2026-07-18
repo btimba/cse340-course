@@ -1,6 +1,4 @@
-
-    
-    <%- include('partials/header') %>
+ <%- include('partials/header') %>
 
 <main class="projects-page">
     <section class="projects-hero">
@@ -11,12 +9,16 @@
 
     <section class="projects-grid">
         <% if (projects.length) { %>
-            <div class="project-card">
-                <ul class="project-list">
-                    <% projects.forEach(project => { %>
-                        <li class="project-item">
-                            <div class="project-card-inner">
-                                <div class="project-main">
+            <ul class="project-list">
+                <% projects.forEach(project => { %>
+                    <li class="project-item">
+                        <div class="project-card-inner">
+                            <div class="project-main">
+                                <a href="/projects/<%= project.project_id %>">
+                                    <h2><%= project.title %></h2>
+                                </a>
+                                <p class="project-meta">
+                                    <span class="project-org"><%= project.organization_name %></span>
                                     <span class="project-date">
                                         <%= new Date(project.project_date).toLocaleDateString('en-US', {
                                             year: 'numeric',
@@ -24,17 +26,13 @@
                                             day: 'numeric'
                                         }) %>
                                     </span>
-                                    <h2><%= project.title %></h2>
-                                    <p class="project-meta">
-                                        <span class="project-org"><%= project.organization_name %></span>
-                                    </p>
-                                </div>
-                                <span class="project-chevron" aria-hidden="true">→</span>
+                                </p>
                             </div>
-                        </li>
-                    <% }) %>
-                </ul>
-            </div>
+                            <span class="project-chevron" aria-hidden="true">→</span>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
         <% } else { %>
             <div class="empty-state">
                 <p>No upcoming service projects are currently available. Check back soon for new opportunities.</p>

@@ -491,6 +491,17 @@ body > main > * {
     object-fit: contain;
 }
 
+.organization-detail-logo {
+    display: block;
+    width: min(320px, 100%);
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.88);
+    padding: 0.75rem;
+}
+
 .empty-state {
     width: 100%;
     max-width: 760px;
