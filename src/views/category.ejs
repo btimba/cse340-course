@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
 
 <main class="categories-page">
+     <a href="/categories">← Back to Categories</a>
     <section class="categories-hero">
         <span class="eyebrow">Explore by Category</span>
         <h1><%= title %></h1>
@@ -8,17 +9,42 @@
     </section>
 
     <section class="categories-grid">
-        <% if (categories.length) { %>
+        <% if (typeof categories !== 'undefined' && categories.length) { %>
+            <ul class="category-list">
+                <% categories.forEach(categoryItem => { %>
+                    <li class="category-item">
+                        <div class="project-card-inner">
+                            <div class="project-main">
+                                <span class="project-date">Category</span>
+                                <h2>
+                                    <a href="/category/<%= categoryItem.category_id %>">
+                                        <%= categoryItem.name %>
+                                    </a>
+                                </h2>
+                                <p class="project-meta">
+                                    <span class="project-org">Community focus area</span>
+                                </p>
+                            </div>
+                            <span class="project-chevron" aria-hidden="true">→</span>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else if (typeof projects !== 'undefined' && projects.length) { %>
             <div class="project-card">
                 <ul class="project-list category-list">
-                    <% categories.forEach(category => { %>
+                    <% projects.forEach(project => { %>
                         <li class="project-item category-item">
                             <div class="project-card-inner">
                                 <div class="project-main">
-                                    <span class="project-date">Category</span>
-                                    <h2><%= category.name %></h2>
+                                    <span class="project-date"><%= category.name %></span>
+                                    <h2>
+                                        <a href="/projects/<%= project.project_id %>">
+                                            <%= project.title %>
+                                        </a>
+                                    </h2>
                                     <p class="project-meta">
-                                        <span class="project-org">Community focus area</span>
+                                        <span class="project-org"><%= project.organization_name %></span>
                                     </p>
                                 </div>
                                 <span class="project-chevron" aria-hidden="true">→</span>
@@ -29,7 +55,7 @@
             </div>
         <% } else { %>
             <div class="empty-state">
-                <p>No categories are available right now. Please check back later.</p>
+                <p>No projects are currently assigned to this category.</p>
             </div>
         <% } %>
     </section>

@@ -1,5 +1,6 @@
 // Import any needed model functions
 import { getAllProjects, getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getCategoryById, getCategoriesForProject, getProjectsForCategory } from '../models/categories.js';
 
 // Define any controller functions
 const showProjectsPage = async (req, res) => {
@@ -7,8 +8,14 @@ const showProjectsPage = async (req, res) => {
    
    try {
         const projects = await getUpcomingProjects(number_of_upcoming_projects);
-       const title = 'Upcoming Service Projects';
-       res.render('projects', { title, projects });
+        const projectsWithCategories = await Promise.all(
+            projects.map(async (project) => {
+                const categories = await getCategoriesForProject(project.project_id);
+                return { ...project, categories };
+            })
+        );
+        const title = 'Upcoming Service Projects';
+        res.render('projects', { title, projects: projectsWithCategories });
    } catch (error) {
        console.error('Error fetching projects:', error);
        res.status(500).send('Internal Server Error');
@@ -22,8 +29,11 @@ const showProjectDetailsPage = async (req, res) => {
         if (!project) {
             return res.status(404).send('Project not found');
         }
+
+        const categories = await getCategoriesForProject(project_id);
+
         const title = `Project: ${project.title}`;
-        res.render('project', { title, project });
+        res.render('project', { title, project, categories });
     } catch (error) {
         console.error('Error fetching project details:', error);
         res.status(500).send('Internal Server Error');

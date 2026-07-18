@@ -27,6 +27,18 @@
                                         }) %>
                                     </span>
                                 </p>
+                                <% if (project.categories?.length) { %>
+                                    <div class="project-categories">
+                                        <strong>Categories:</strong>
+                                        <% project.categories.forEach(category => { %>
+                                            <a
+                                                class="category-tag"
+                                                href="/category/<%= category.category_id %>">
+                                                <%= category.name %>
+                                            </a>
+                                        <% }) %>
+                                    </div>
+                                <% } %>
                             </div>
                             <span class="project-chevron" aria-hidden="true">→</span>
                         </div>
