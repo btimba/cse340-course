@@ -12,7 +12,7 @@
             <h2>Project Information</h2>
             <ul>
                 <li><strong>Date:</strong> <%= new Date(project.project_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></li>
-                <li><strong>Organization:</strong> <%= project.organization_name %></li>
+                <li><strong>Organization:</strong> <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a></li>
                 <li><strong>Location:</strong> <%= project.location %></li>
             </ul>
         </div>

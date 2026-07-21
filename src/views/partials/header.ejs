@@ -16,9 +16,32 @@
             <span></span>
         </button>
         <ul id="site-menu" class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/categories">Categories</a></li>
+            <li>
+                <a href="/"
+                   <%= typeof currentPage !== 'undefined' && currentPage === "home" ? 'aria-current="page"' : "" %>>
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="/projects"
+                   <%= typeof currentPage !== 'undefined' && currentPage === "projects" ? 'aria-current="page"' : "" %>>
+                    Projects
+                </a>
+            </li>
+
+            <li>
+                <a href="/organizations"
+                   <%= typeof currentPage !== 'undefined' && currentPage === "organizations" ? 'aria-current="page"' : "" %>>
+                    Organizations
+                </a>
+            </li>
+
+            <li>
+                <a href="/categories"
+                   <%= typeof currentPage !== 'undefined' && currentPage === "categories" ? 'aria-current="page"' : "" %>>
+                    Categories
+                </a>
+            </li>
         </ul>
     </nav>

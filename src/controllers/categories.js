@@ -6,7 +6,7 @@ const showCategoriesPage = async (req, res) => {
     const categories = await getAllCategories();
     const title = 'Service Categories';
 
-    res.render('category', { title, categories });
+    res.render('category', { title, categories, currentPage: 'categories' });
 };  
 
 const showCategoryDetailsPage = async (req, res) => {
@@ -26,7 +26,8 @@ const showCategoryDetailsPage = async (req, res) => {
         res.render("category", {
             title: category.name,
             category,
-            projects
+            projects,
+            currentPage: 'categories'
         });
 
     } catch (error) {

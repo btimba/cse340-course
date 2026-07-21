@@ -15,7 +15,7 @@ const showProjectsPage = async (req, res) => {
             })
         );
         const title = 'Upcoming Service Projects';
-        res.render('projects', { title, projects: projectsWithCategories });
+        res.render('projects', { title, projects: projectsWithCategories, currentPage: 'projects' });
    } catch (error) {
        console.error('Error fetching projects:', error);
        res.status(500).send('Internal Server Error');
@@ -33,7 +33,7 @@ const showProjectDetailsPage = async (req, res) => {
         const categories = await getCategoriesForProject(project_id);
 
         const title = `Project: ${project.title}`;
-        res.render('project', { title, project, categories });
+        res.render('project', { title, project, categories, currentPage: 'projects' });
     } catch (error) {
         console.error('Error fetching project details:', error);
         res.status(500).send('Internal Server Error');

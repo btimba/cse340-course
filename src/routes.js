@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/', showHomePage);
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:organization_id', showOrganizationDetailsPage);
-router.get('/projects/:project_id', showProjectDetailsPage);
+router.get('/project/:project_id', showProjectDetailsPage);
 router.get('/projects', showProjectsPage);
 router.get('/categories', showCategoriesPage);
 router.get('/category', showCategoriesPage);
